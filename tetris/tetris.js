@@ -5,6 +5,7 @@ const displayWidth = 4;
 const displayHeight = 4;
 const width = 10;
 const height = 20;
+let timerId = null;
 
 // Define smallTetrominoes
 const smallTetrominoes = [
@@ -12,7 +13,7 @@ const smallTetrominoes = [
     [0, displayWidth, displayWidth+1, 2*displayWidth+1],    // zTetromino
     [1, displayWidth, displayWidth+1, displayWidth+2],      // tTetromino
     [0, 1, displayWidth, displayWidth+1],                   // oTetromino
-    [1, displayWidth+1, 2*displayWidth+1, 3*displayWidth+1] //iTetromino
+    [1, displayWidth+1, 2*displayWidth+1, 3*displayWidth+1] // iTetromino
 ];
 
 // Define tetrominos
@@ -56,14 +57,24 @@ const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromi
 
 function main() {
 
-    const previousGrid = $(".previous-grid");
+    const previewGrid = $(".preview-grid");
     const grid = $(".grid");
+    const startBtn = $("button");
+    const scoreDisplay = $(".score-display");
+    const linesDisplay = $(".lines-display");
+    let currentPosition = 4;
+    let score = 0;
+    let lines = 0;
+
+    function getRandom() {
+	return Math.floor(Math.random()*theTetrominoes.length);
+    }
     
     function createGrids() {
-	previousGrid.empty();
+	previewGrid.empty();
 	for(let i=0; i<displayWidth; i++) {
 	    for(let j=0; j<displayHeight; j++) {
-		previousGrid.append($(`<div></div>`));
+		previewGrid.append($(`<div></div>`));
 	    }
 	}
 	
@@ -82,13 +93,12 @@ function main() {
     
     createGrids();
 
-    const displaySquares = $(".previous-grid div").toArray();
+    const displaySquares = $(".preview-grid div").toArray();
     const squares = $(".grid div").toArray();
-    let currentPosition = 4;
     
     //Randomly select a shape
-    let random = Math.floor(Math.random()*theTetrominoes.length);
-    let nextRandom = Math.floor(Math.random()*theTetrominoes.length);
+    let random = getRandom();
+    let nextRandom = getRandom();
     let currentRotation = 0;
     let current = theTetrominoes[random][currentRotation];
     
@@ -113,7 +123,7 @@ function main() {
 	undraw();
 	currentPosition = currentPosition += width;
 	draw();
-	freeze();
+	checkFreeze();
     }
 
     // Move shape right
@@ -133,7 +143,7 @@ function main() {
     // Move shape left
     function moveLeft() {
 	const isAtLeftEdge = index => (currentPosition + index)%width === 0;
-	const collides = index =>  $(squares[currentPosition + index + 1]).hasClass("block-frozen");
+	const collides = index =>  $(squares[currentPosition + index - 1]).hasClass("block-frozen");
 	const bad = current.some(
 	    index => isAtLeftEdge(index) || collides(index)
 	);
@@ -161,6 +171,7 @@ function main() {
 		$(square).removeClass("block-shape");
 	    }
 	);
+	console.log(nextRandom);
 	smallTetrominoes[nextRandom].forEach(
 	    index => $(displaySquares[displayIndex + index]).addClass("block-shape")
 	);
@@ -169,22 +180,67 @@ function main() {
     displayShape();
 
     // Freeze the shape if necessary
-    function freeze() {
-	if(
-	    current.some(
-		index => $(squares[currentPosition + index + width]).hasClass("block-frozen")
-		    || $(squares[currentPosition + index + width]).hasClass("block-bottom")
-	    )) {
+    function checkFreeze() {
+	if( current.some(
+	    index => $(squares[currentPosition + index + width]).hasClass("block-frozen")
+		|| $(squares[currentPosition + index + width]).hasClass("block-bottom")
+	)) {
 	    current.forEach( index => {
 		$(squares[currentPosition + index]).removeClass("block-shape");
 		$(squares[currentPosition + index]).addClass("block-frozen");
 	    });
 	    random = nextRandom;
-	    nextRandom = Math.floor(Math.random()*theTetrominoes.length);
+	    nextRandom = getRandom();
 	    current = theTetrominoes[random][currentRotation];
 	    currentPosition = 4;
 	    draw();
 	    displayShape();
+	    gameOver();
+	    addScore();
+	}
+    }
+
+    // Start button
+    startBtn.click( function(){
+	if(timerId) {
+	    clearInterval(timerId);
+	    timerId = null;
+	}
+	else {
+	    draw();
+	    timerId = setInterval(moveDown, 1000);
+	    nextRandom = getRandom();
+	    displayShape();
+	}
+    });
+
+    // Game over
+    function gameOver() {
+	if(current.some(
+	    index => squares[currentPosition + index].classList.contains("block-frozen"))
+	  ){
+	    scoreDisplay.text("END");
+	    clearInterval(timerId);
+	}
+    }
+
+    // Add score
+    function addScore() {
+	for(let i=0; i<199; i+=width){
+	    const row = [i,i+1,i+1,i+3,i+4,i+5,i+6,i+7,i+8,i+9];
+	    if(row.every(index => squares[index].classList.contains("block-frozen"))){
+		score += 10;
+		lines += 1;
+		scoreDisplay.text(score);
+		linesDisplay.text(lines);
+		row.forEach(index => {
+		    squares[index].classList.remove("block-frozen")
+			|| squares[index].classList.remove("block-shape");
+		});
+		const squaresRemoved = squares.splice(currentIndex, width);
+		squares = squaresRemoved.concat(squares);
+		squares.forEach(cell => grid.appendChild(cell));
+	    }
 	}
     }
 

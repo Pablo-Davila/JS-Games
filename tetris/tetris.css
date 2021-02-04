@@ -12,14 +12,14 @@ div {
     flex-wrap: wrap;
 }
 
-.previous-grid {
+.preview-grid {
     height: 80px;
     width: 80px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.previous-shape {
+.preview-shape {
     height: 80px;
     width: 80px;
 }
