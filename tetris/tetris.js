@@ -94,7 +94,7 @@ function main() {
     createGrids();
 
     const displaySquares = $(".preview-grid div").toArray();
-    const squares = $(".grid div").toArray();
+    let squares = $(".grid div").toArray();
     
     //Randomly select a shape
     let random = getRandom();
@@ -171,7 +171,6 @@ function main() {
 		$(square).removeClass("block-shape");
 	    }
 	);
-	console.log(nextRandom);
 	smallTetrominoes[nextRandom].forEach(
 	    index => $(displaySquares[displayIndex + index]).addClass("block-shape")
 	);
@@ -227,19 +226,18 @@ function main() {
     // Add score
     function addScore() {
 	for(let i=0; i<199; i+=width){
-	    const row = [i,i+1,i+1,i+3,i+4,i+5,i+6,i+7,i+8,i+9];
+	    const row = [i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,i+8,i+9];
 	    if(row.every(index => squares[index].classList.contains("block-frozen"))){
 		score += 10;
 		lines += 1;
 		scoreDisplay.text(score);
 		linesDisplay.text(lines);
 		row.forEach(index => {
-		    squares[index].classList.remove("block-frozen")
-			|| squares[index].classList.remove("block-shape");
+		    $(squares[index]).removeClass("block-frozen").removeClass("block-shape");
 		});
-		const squaresRemoved = squares.splice(currentIndex, width);
+		const squaresRemoved = squares.splice(i, width);
 		squares = squaresRemoved.concat(squares);
-		squares.forEach(cell => grid.appendChild(cell));
+		squares.forEach(cell => grid.append(cell));
 	    }
 	}
     }

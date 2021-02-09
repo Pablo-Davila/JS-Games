@@ -1,37 +1,51 @@
 
-div {
-    background-color: yellow;
-    height: 20px;
-    width: 20px;
-}
-
 .grid {
-    height: 400px;
-    width: 200px;
+    height: 500px;
+    width: 250px;
     display: flex;
     flex-wrap: wrap;
+    background-color: yellow;
+}
+
+.grid div {
+    height: 25px;
+    width:  25px;
 }
 
 .preview-grid {
-    height: 80px;
-    width: 80px;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
 
 .preview-shape {
-    height: 80px;
-    width: 80px;
+    height: 96px;
+    width: 96px;
 }
 
-.block-shape {
+.grid .block-shape,
+.grid .block-bottom,
+.grid .block-frozen {
+    height: 23px;
+    width:  23px;
+    
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.grid .block-shape {
     background-color: blue;
+    border-color: lightblue;
 }
 
-.block-bottom {
+.grid .block-bottom {
     background-color: purple;
+    border-color: pink;
 }
 
-.block-frozen {
+.grid .block-frozen {
     background-color: green;
+    border-color: lightgreen;
 }
