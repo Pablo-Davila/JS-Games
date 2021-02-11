@@ -6,6 +6,7 @@ const displayHeight = 4;
 const width = 10;
 const height = 20;
 let timerId = null;
+let interval = 1000;
 
 // Define smallTetrominoes
 const smallTetrominoes = [
@@ -59,7 +60,7 @@ function main() {
 
     const previewGrid = $(".preview-grid");
     const grid = $(".grid");
-    const startBtn = $("button");
+    const startBtn = $("#start-button");
     const scoreDisplay = $(".score-display");
     const linesDisplay = $(".lines-display");
     let currentPosition = 4;
@@ -199,20 +200,6 @@ function main() {
 	}
     }
 
-    // Start button
-    startBtn.click( function(){
-	if(timerId) {
-	    clearInterval(timerId);
-	    timerId = null;
-	}
-	else {
-	    draw();
-	    timerId = setInterval(moveDown, 1000);
-	    nextRandom = getRandom();
-	    displayShape();
-	}
-    });
-
     // Game over
     function gameOver() {
 	if(current.some(
@@ -241,6 +228,12 @@ function main() {
 	    }
 	}
     }
+    $("#music-button").click( function(){
+	let music = document.getElementById("music");
+	if (music.paused) music.play();
+	else music.pause();
+    });
+    document.getElementById("music").volume = 0.2;
 
     // Assign functions to keycodes
     function control(e) {
@@ -258,6 +251,20 @@ function main() {
 	}
     }
     $(document).keyup(control);
+    
+    // Start button
+    startBtn.click( function(){
+	if(timerId) {
+	    clearInterval(timerId);
+	    timerId = null;
+	}
+	else {
+	    draw();
+	    timerId = setInterval(moveDown, 1000);
+	    nextRandom = getRandom();
+	    displayShape();
+	}
+    });
     
     draw();
 }
