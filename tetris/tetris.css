@@ -1,15 +1,22 @@
 
+/* Display */
+
 .grid {
     height: 500px;
     width: 250px;
     display: flex;
     flex-wrap: wrap;
-    background-color: yellow;
 }
 
-.grid div {
+.grid div,
+.preview-grid div {
     height: 25px;
     width:  25px;
+}
+
+.preview-shape {
+    height: 100px;
+    width: 100px;
 }
 
 .preview-grid {
@@ -19,33 +26,41 @@
     flex-wrap: wrap;
 }
 
-.preview-shape {
-    height: 96px;
-    width: 96px;
+.block-shape,
+.block-bottom,
+.block-frozen {
+    height: 23px !important;
+    width:  23px !important;
 }
 
-.grid .block-shape,
-.grid .block-bottom,
-.grid .block-frozen {
-    height: 23px;
-    width:  23px;
-    
-    border-radius: 6px;
-    border-width: 1px;
-    border-style: solid;
+/* Styling */
+
+.grid,
+.preview-grid {
+    background-color: yellow;
+    border-style: hidden;
+    border-radius: 10px;
 }
 
-.grid .block-shape {
-    background-color: blue;
-    border-color: lightblue;
+.block-shape,
+.block-bottom,
+.block-frozen {
+    border-radius: 6px !important;
+    border-width: 1px !important;
+    border-style: solid !important;
 }
 
-.grid .block-bottom {
-    background-color: purple;
-    border-color: pink;
+.block-shape {
+    background-color: blue !important;
+    border-color: lightblue !important;
 }
 
-.grid .block-frozen {
-    background-color: green;
-    border-color: lightgreen;
+.block-bottom {
+    background-color: purple !important;
+    border-color: pink !important;
+}
+
+.block-frozen {
+    background-color: green !important;
+    border-color: lightgreen !important;
 }
