@@ -61,7 +61,7 @@ function main() {
 
     const previewGrid = $(".preview-grid");
     const grid = $(".grid");
-    const startBtn = $("#start-button");
+    const startBtn = $("#btn-play");
     const scoreDisplay = $(".score-display");
     const linesDisplay = $(".lines-display");
     let currentPosition = 4;
@@ -274,16 +274,22 @@ function main() {
     $(document).keyup(control);
 
     // Music button
+    function musicOn() {
+	$("#btn-music").attr("src", "../img/nosound.png");
+	music.play();
+	music.loop = true;
+    }
+    function musicOff() {
+	$("#btn-music").attr("src", "../img/sound.png");
+	music.pause();
+    }
     function musicToggle(){
 	let music = document.getElementById("music");
-	if (music.paused){
-	    music.play();
-	    music.loop = true;
-	}
-	else music.pause();
+	if (music.paused) musicOn();
+	else musicOff();
     }
     
-    $("#music-button").click(function(event){
+    $("#btn-music").click(function(event){
 	musicToggle();
 	$("#game").focus();
     });
@@ -295,11 +301,13 @@ function main() {
 	$("#game").focus();
 
 	if(timerId) {
+	    startBtn.attr("src", "../img/play.png");
 	    clearInterval(timerId);
 	    timerId = null;
-	    music.pause();
+	    musicOff();
 	}
 	else {
+	    startBtn.attr("src", "../img/pause.png");
 	    draw();
 	    timerId = setInterval(moveDown, 1000);
 	    nextRandom = getRandom();
@@ -307,8 +315,7 @@ function main() {
 	    gameIsOver = false;
 
 	    if (music.paused){
-		music.play();
-		music.loop = true;
+		musicOn();
 	    }
 	}
     });

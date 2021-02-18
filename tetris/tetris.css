@@ -37,6 +37,25 @@ body {
 .buttons {
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+#btn-play,
+#btn-music {
+    width: 50px;
+    height: 50px;
+}
+#btn-play:hover,
+#btn-music:hover {
+    scale: 1.2;
+    opacity: 0.9;
+}
+
+.info {
+    display: grid;
+    grid-template-areas:
+	"score-text score-value" "lines-text lines-value" "level-text level-value";
+    grid-column-gap: 1em;
 }
 
 .preview-grid,
@@ -72,7 +91,16 @@ body {
     width:  23px !important;
 }
 
+
 /* Styling */
+
+a {
+    color: darkcyan;
+    text-decoration: none;
+}
+a:hover {
+    opacity: 50%;
+}
 
 #main-title,
 #subtitle {
@@ -83,6 +111,11 @@ body {
     font-family: "PixelGames";
     font-size: 80px;
     margin: 0;
+}
+
+.info {
+    font-family: "PixelGames";
+    font-size: 24px;
 }
 
 .grid,
