@@ -108,6 +108,7 @@ function main() {
 	current.forEach(
 	    index => $(squares[currentPosition + index]).addClass("block-shape")
 	);
+	checkFreeze();
     }
     
     draw();
@@ -124,7 +125,6 @@ function main() {
 	undraw();
 	currentPosition = currentPosition += width;
 	draw();
-	checkFreeze();
     }
 
     // Move shape right
@@ -228,20 +228,11 @@ function main() {
 	    }
 	}
     }
-    $("#music-button").click( function(){
-	let music = document.getElementById("music");
-	if (music.paused) music.play();
-	else music.pause();
-    });
-    document.getElementById("music").volume = 0.2;
 
     // Assign functions to keycodes
     function control(e) {
 	if(e.keyCode === 39) {
 	    moveRight();
-	}
-	else if(e.keyCode === 38) {
-	    rotate();
 	}
 	else if(e.keyCode === 37) {
 	    moveLeft();
@@ -249,20 +240,50 @@ function main() {
 	else if(e.keyCode === 40) {
 	    moveDown();
 	}
+	else if(e.keyCode === 38 || e.key === " ") {
+	    rotate();
+	}
+	else if(e.key === "m") {
+	    musicToggle();
+	}
     }
     $(document).keyup(control);
+
+    // Music button
+    function musicToggle(){
+	let music = document.getElementById("music");
+	if (music.paused){
+	    music.play();
+	    music.loop = true;
+	}
+	else music.pause();
+    }
     
+    $("#music-button").click(function(event){
+	musicToggle();
+	$("#start-button").focus();
+    });
+    document.getElementById("music").volume = 0.2;
+
     // Start button
     startBtn.click( function(){
+	let music = document.getElementById("music");
+
 	if(timerId) {
 	    clearInterval(timerId);
 	    timerId = null;
+	    music.pause();
 	}
 	else {
 	    draw();
 	    timerId = setInterval(moveDown, 1000);
 	    nextRandom = getRandom();
 	    displayShape();
+
+	    if (music.paused){
+		music.play();
+		music.loop = true;
+	    }
 	}
     });
     
