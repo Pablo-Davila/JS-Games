@@ -7,6 +7,7 @@ const width = 10;
 const height = 20;
 let timerId = null;
 let interval = 1000;
+let gameIsOver;
 
 // Define smallTetrominoes
 const smallTetrominoes = [
@@ -127,6 +128,23 @@ function main() {
 	draw();
     }
 
+    function moveFullDown() {
+	undraw();
+	let mini = height;
+	for(let index of current){
+	    let counter = 0;
+	    let nextSquare = $(squares[currentPosition+index + (counter+1)*width]);
+	    while(!nextSquare.hasClass("block-frozen") && !nextSquare.hasClass("block-bottom")){
+		counter++;
+		nextSquare = $(squares[currentPosition+index + (counter+1)*width]);
+	    }
+	    if(counter < mini) mini = counter;
+	}
+	for(let i=0; i<mini; i++){
+	    moveDown();
+	}
+    }
+
     // Move shape right
     function moveRight() {
 	const isAtRightEdge = index => (currentPosition + index)%width === width-1;
@@ -189,24 +207,27 @@ function main() {
 		$(squares[currentPosition + index]).removeClass("block-shape");
 		$(squares[currentPosition + index]).addClass("block-frozen");
 	    });
-	    random = nextRandom;
-	    nextRandom = getRandom();
-	    current = theTetrominoes[random][currentRotation];
-	    currentPosition = 4;
-	    draw();
-	    displayShape();
 	    gameOver();
 	    addScore();
+	    if(!gameIsOver){
+		random = nextRandom;
+		nextRandom = getRandom();
+		current = theTetrominoes[random][currentRotation];
+		currentPosition = 4;
+		draw();
+		displayShape();
+	    }
 	}
     }
 
     // Game over
     function gameOver() {
-	if(current.some(
-	    index => squares[currentPosition + index].classList.contains("block-frozen"))
-	  ){
-	    scoreDisplay.text("END");
-	    clearInterval(timerId);
+	for(let i=width; i<2*width; i++){
+	    if($(squares[i]).hasClass("block-frozen")){
+		gameIsOver = true;
+		scoreDisplay.text("END");
+		clearInterval(timerId);
+	    }
 	}
     }
 
@@ -240,8 +261,11 @@ function main() {
 	else if(e.keyCode === 40) {
 	    moveDown();
 	}
-	else if(e.keyCode === 38 || e.key === " ") {
+	else if(e.keyCode === 38) {
 	    rotate();
+	}
+	else if(e.key === " "){
+	    moveFullDown();
 	}
 	else if(e.key === "m") {
 	    musicToggle();
@@ -261,13 +285,14 @@ function main() {
     
     $("#music-button").click(function(event){
 	musicToggle();
-	$("#start-button").focus();
+	$("#game").focus();
     });
     document.getElementById("music").volume = 0.2;
 
     // Start button
     startBtn.click( function(){
 	let music = document.getElementById("music");
+	$("#game").focus();
 
 	if(timerId) {
 	    clearInterval(timerId);
@@ -279,6 +304,7 @@ function main() {
 	    timerId = setInterval(moveDown, 1000);
 	    nextRandom = getRandom();
 	    displayShape();
+	    gameIsOver = false;
 
 	    if (music.paused){
 		music.play();
