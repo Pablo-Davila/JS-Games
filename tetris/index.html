@@ -15,39 +15,47 @@
 	Your browser does not support the audio element.
     </audio>
 
-    <!-- Buttons -->
-    <button id="start-button">Start/Pause</button>
-    <button id="music-button">Music</button>
-
-    <!-- Info -->
-    <div class="info-wrap">
-      <div id="info-score" class="info">
-	<span>Score - </span>
-	<span class="score-display">0</span>
-      </div>
-      
-      <div id="info-lines" class="info">
-	<span>Lines - </span>
-	<span class="lines-display">0</span>
-      </div>
-      
-      <div id="info-level" class="info">
-	<span>Level - </span>
-	<span class="level-display">0</span>
-      </div>
-    </div>
+    <!-- Title -->
+    <h1 id="main-title">Tetris</h1>
+    <p id="subtitle"><i>Created by Pablo Dávila Herrero</i></p>
 
     <!-- Game -->
     <div class="game-display">
-      <div class="preview-shape">
-	<div class="preview-grid"><!-- Preview of the next shape --></div>
+      
+      <!-- Left column -->
+      <div id="left-data" class="col w-40">
+	<div class="preview-shape">
+	  <div class="preview-grid"><!-- Preview of the next shape --></div>
+	</div>
+
+	<!-- Info -->
+	<div class="info-wrap">
+	  <div id="info-score" class="info">
+	    <span>Score - </span>
+	    <span class="score-display">0</span>
+	  </div>
+	  <div id="info-lines" class="info">
+	    <span>Lines - </span>
+	    <span class="lines-display">0</span>
+	  </div>
+	  <div id="info-level" class="info">
+	    <span>Level - </span>
+	    <span class="level-display">0</span>
+	  </div>
+	</div>
+	
+	<!-- Buttons -->
+	<div class="buttons col">
+	  <button id="start-button">Start/Pause</button>
+	  <button id="music-button">Music</button>
+	</div>
       </div>
 
-      <br>
-      
-      <div id="game" class="game">
+      <!-- Right column -->
+      <div id="game" class="game col w-60">
 	<div id="grid" class="grid"><!-- Actual game grid --></div>
       </div>
+      
     </div>
   </body>
   

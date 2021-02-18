@@ -1,8 +1,42 @@
 
+/* Fonts */
+@font-face {
+    font-family: "PixelGames";
+    src: url('../fonts/PixelGames.ttf')  format('truetype');
+}
+
+/* General */
+.w-40 { width: 40%;}
+.w-60 { width: 60%;}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
 /* Display */
 
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    padding: 5em;
+}
+
 .game-display {
-    width: 100%;
+    display: flex;
+    width: 30em;
+    margin: auto;
+    margin-top: 5em;
+}
+
+#left-data,
+.buttons {
+    align-items: center;
+    justify-content: space-between;
 }
 
 .preview-grid,
@@ -39,6 +73,17 @@
 }
 
 /* Styling */
+
+#main-title,
+#subtitle {
+    text-align: center;
+}
+
+#main-title {
+    font-family: "PixelGames";
+    font-size: 80px;
+    margin: 0;
+}
 
 .grid,
 .preview-grid {
