@@ -1,21 +1,22 @@
 "use strict";
 
 // Define grid size
-const displayWidth = 4;
-const displayHeight = 4;
+const previewWidth = 4;
+const previewHeight = 4;
 const width = 10;
 const height = 20;
 let timerId = null;
 let interval = 1000;
-let gameIsOver;
+let playing = false;
+let gameIsOver = false;
 
 // Define smallTetrominoes
 const smallTetrominoes = [
-    [1, displayWidth+1, 2*displayWidth+1, 2],               // lTetromino
-    [0, displayWidth, displayWidth+1, 2*displayWidth+1],    // zTetromino
-    [1, displayWidth, displayWidth+1, displayWidth+2],      // tTetromino
-    [0, 1, displayWidth, displayWidth+1],                   // oTetromino
-    [1, displayWidth+1, 2*displayWidth+1, 3*displayWidth+1] // iTetromino
+    [1, previewWidth+1, 2*previewWidth+1, 2],               // lTetromino
+    [0, previewWidth, previewWidth+1, 2*previewWidth+1],    // zTetromino
+    [1, previewWidth, previewWidth+1, previewWidth+2],      // tTetromino
+    [0, 1, previewWidth, previewWidth+1],                   // oTetromino
+    [1, previewWidth+1, 2*previewWidth+1, 3*previewWidth+1] // iTetromino
 ];
 
 // Define tetrominos
@@ -74,8 +75,8 @@ function main() {
     
     function createGrids() {
 	previewGrid.empty();
-	for(let i=0; i<displayWidth; i++) {
-	    for(let j=0; j<displayHeight; j++) {
+	for(let i=0; i<previewWidth; i++) {
+	    for(let j=0; j<previewHeight; j++) {
 		previewGrid.append($(`<div></div>`));
 	    }
 	}
@@ -95,7 +96,7 @@ function main() {
     
     createGrids();
 
-    const displaySquares = $(".preview-grid div").toArray();
+    const previewSquares = $(".preview-grid div").toArray();
     let squares = $(".grid div").toArray();
     
     //Randomly select a shape
@@ -112,8 +113,6 @@ function main() {
 	checkFreeze();
     }
     
-    draw();
-
     // Undraw the shape
     function undraw() {
 	current.forEach(
@@ -123,12 +122,15 @@ function main() {
 
     // Move shape down
     function moveDown() {
+	if(!playing) return;
 	undraw();
 	currentPosition = currentPosition += width;
 	draw();
     }
-
+    
+    // Move shape to the bottom
     function moveFullDown() {
+	if(!playing) return;
 	undraw();
 	let mini = height;
 	for(let index of current){
@@ -147,6 +149,7 @@ function main() {
 
     // Move shape right
     function moveRight() {
+	if(!playing) return;
 	const isAtRightEdge = index => (currentPosition + index)%width === width-1;
 	const collides = index =>  $(squares[currentPosition + index + 1]).hasClass("block-frozen");
 	const bad = current.some(
@@ -161,6 +164,7 @@ function main() {
 
     // Move shape left
     function moveLeft() {
+	if(!playing) return;
 	const isAtLeftEdge = index => (currentPosition + index)%width === 0;
 	const collides = index =>  $(squares[currentPosition + index - 1]).hasClass("block-frozen");
 	const bad = current.some(
@@ -176,26 +180,27 @@ function main() {
     // Rotate shape
     // TODO: Avoid collisions
     function rotate() {
+	if(!playing) return;
 	undraw();
 	currentRotation = (currentRotation+1)%current.length;
 	current = theTetrominoes[random][currentRotation];
 	draw();
     }
 
-    // Show previous tetromino in displaySquares
+    // Show previous tetromino in previewSquares
     const displayIndex = 0;
-    function displayShape() {
-	displaySquares.forEach(
+    function drawPreview() {
+	previewSquares.forEach(
 	    square => {
 		$(square).removeClass("block-shape");
 	    }
 	);
 	smallTetrominoes[nextRandom].forEach(
-	    index => $(displaySquares[displayIndex + index]).addClass("block-shape")
+	    index => $(previewSquares[displayIndex + index]).addClass("block-shape")
 	);
     }
 
-    displayShape();
+    drawPreview();
 
     // Freeze the shape if necessary
     function checkFreeze() {
@@ -215,7 +220,7 @@ function main() {
 		current = theTetrominoes[random][currentRotation];
 		currentPosition = 4;
 		draw();
-		displayShape();
+		drawPreview();
 	    }
 	}
     }
@@ -250,29 +255,6 @@ function main() {
 	}
     }
 
-    // Assign functions to keycodes
-    function control(e) {
-	if(e.keyCode === 39) {
-	    moveRight();
-	}
-	else if(e.keyCode === 37) {
-	    moveLeft();
-	}
-	else if(e.keyCode === 40) {
-	    moveDown();
-	}
-	else if(e.keyCode === 38) {
-	    rotate();
-	}
-	else if(e.key === " "){
-	    moveFullDown();
-	}
-	else if(e.key === "m") {
-	    musicToggle();
-	}
-    }
-    $(document).keyup(control);
-
     // Music button
     function musicOn() {
 	$("#btn-music").attr("src", "../img/nosound.png");
@@ -301,17 +283,19 @@ function main() {
 	$("#game").focus();
 
 	if(timerId) {
+	    playing = false;
 	    startBtn.attr("src", "../img/play.png");
 	    clearInterval(timerId);
 	    timerId = null;
 	    musicOff();
 	}
 	else {
+	    playing = true;
 	    startBtn.attr("src", "../img/pause.png");
 	    draw();
 	    timerId = setInterval(moveDown, 1000);
 	    nextRandom = getRandom();
-	    displayShape();
+	    drawPreview();
 	    gameIsOver = false;
 
 	    if (music.paused){
@@ -319,6 +303,29 @@ function main() {
 	    }
 	}
     });
+
+    // Assign functions to keycodes
+    function control(e) {
+	if(e.keyCode === 39) {
+	    moveRight();
+	}
+	else if(e.keyCode === 37) {
+	    moveLeft();
+	}
+	else if(e.keyCode === 40) {
+	    moveDown();
+	}
+	else if(e.keyCode === 38) {
+	    rotate();
+	}
+	else if(e.key === " "){
+	    moveFullDown();
+	}
+	else if(e.key === "m") {
+	    musicToggle();
+	}
+    }
+    $(document).keyup(control);
     
     draw();
 }
