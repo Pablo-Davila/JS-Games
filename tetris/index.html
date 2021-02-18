@@ -9,26 +9,45 @@
   </head>
   
   <body>
-
+    <!-- Background music -->
     <audio id="music">
       <source src="../sound/arcade.mp3" volume="0.5" loop autoplay>
 	Your browser does not support the audio element.
     </audio>
-    
+
+    <!-- Buttons -->
     <button id="start-button">Start/Pause</button>
     <button id="music-button">Music</button>
 
-    <h1 class="score-display">0</h1>
-    <h1 class="lines-display">0</h1>
-    
-    <div class="preview-shape">
-      <div class="preview-grid"><!-- Preview of the next shape --></div>
+    <!-- Info -->
+    <div class="info-wrap">
+      <div id="info-score" class="info">
+	<span>Score - </span>
+	<span class="score-display">0</span>
+      </div>
+      
+      <div id="info-lines" class="info">
+	<span>Lines - </span>
+	<span class="lines-display">0</span>
+      </div>
+      
+      <div id="info-level" class="info">
+	<span>Level - </span>
+	<span class="level-display">0</span>
+      </div>
     </div>
 
-    <br>
-    
-    <div id="game" class="game">
-      <div id="grid" class="grid"><!-- Actual game grid --></div>
+    <!-- Game -->
+    <div class="game-display">
+      <div class="preview-shape">
+	<div class="preview-grid"><!-- Preview of the next shape --></div>
+      </div>
+
+      <br>
+      
+      <div id="game" class="game">
+	<div id="grid" class="grid"><!-- Actual game grid --></div>
+      </div>
     </div>
   </body>
   
