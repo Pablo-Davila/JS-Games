@@ -6,9 +6,9 @@ const previewHeight = 4;
 const width = 10;
 const height = 20;
 let timerId = null;
-let interval = 1000;
 let playing = false;
 let gameIsOver = false;
+let level = 0;
 
 // Define smallTetrominoes
 const smallTetrominoes = [
@@ -231,7 +231,6 @@ function main() {
 	    if($(squares[i]).hasClass("block-frozen")){
 		gameIsOver = true;
 		scoreDisplay.text("END");
-		clearInterval(timerId);
 	    }
 	}
     }
@@ -241,8 +240,9 @@ function main() {
 	for(let i=0; i<199; i+=width){
 	    const row = [i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,i+8,i+9];
 	    if(row.every(index => squares[index].classList.contains("block-frozen"))){
-		score += 10;
+		score += 10 + Math.floor(5*level);
 		lines += 1;
+		level = Math.floor(lines/10);
 		scoreDisplay.text(score);
 		linesDisplay.text(lines);
 		row.forEach(index => {
@@ -282,20 +282,14 @@ function main() {
 	let music = document.getElementById("music");
 	$("#game").focus();
 
-	if(timerId) {
+	if(playing) {
 	    playing = false;
 	    startBtn.attr("src", "../img/play.png");
-	    clearInterval(timerId);
-	    timerId = null;
 	    musicOff();
 	}
 	else {
 	    playing = true;
 	    startBtn.attr("src", "../img/pause.png");
-	    draw();
-	    timerId = setInterval(moveDown, 1000);
-	    nextRandom = getRandom();
-	    drawPreview();
 	    gameIsOver = false;
 
 	    if (music.paused){
@@ -304,6 +298,16 @@ function main() {
 	}
     }
     startBtn.click(playToggle);
+
+    // Falling blocks
+    function getInterval(){
+	return Math.pow(0.8 - level*0.007, level)*1000;
+    }
+    function blockFall(){
+	if(playing) moveDown();
+	setTimeout(blockFall, getInterval());
+    }
+    setTimeout(blockFall, Math.pow(0.8 - level*0.007, level));
 
     // Assign functions to keycodes
     function control(e) {
