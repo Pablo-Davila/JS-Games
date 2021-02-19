@@ -278,7 +278,7 @@ function main() {
     document.getElementById("music").volume = 0.2;
 
     // Start button
-    startBtn.click( function(){
+    function playToggle(){
 	let music = document.getElementById("music");
 	$("#game").focus();
 
@@ -302,7 +302,8 @@ function main() {
 		musicOn();
 	    }
 	}
-    });
+    }
+    startBtn.click(playToggle);
 
     // Assign functions to keycodes
     function control(e) {
@@ -320,6 +321,9 @@ function main() {
 	}
 	else if(e.key === " "){
 	    moveFullDown();
+	}
+	else if(e.key === "p") {
+	    playToggle();
 	}
 	else if(e.key === "m") {
 	    musicToggle();
