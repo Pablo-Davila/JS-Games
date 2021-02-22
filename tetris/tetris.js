@@ -63,8 +63,9 @@ function main() {
     const previewGrid = $(".preview-grid");
     const grid = $(".grid");
     const startBtn = $("#btn-play");
-    const scoreDisplay = $(".score-display");
-    const linesDisplay = $(".lines-display");
+    const scoreDisplay = $("#score-display");
+    const linesDisplay = $("#lines-display");
+    const levelDisplay = $("#level-display");
     let currentPosition = 4;
     let score = 0;
     let lines = 0;
@@ -230,6 +231,7 @@ function main() {
 	for(let i=width; i<2*width; i++){
 	    if($(squares[i]).hasClass("block-frozen")){
 		gameIsOver = true;
+		playing = false;
 		scoreDisplay.text("END");
 	    }
 	}
@@ -245,6 +247,7 @@ function main() {
 		level = Math.floor(lines/10);
 		scoreDisplay.text(score);
 		linesDisplay.text(lines);
+		levelDisplay.text(level);
 		row.forEach(index => {
 		    $(squares[index]).removeClass("block-frozen").removeClass("block-shape");
 		});
