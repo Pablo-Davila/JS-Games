@@ -1,7 +1,32 @@
 
+
+/* Display */
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
 .grid {
     display: flex;
     flex-wrap: wrap;
     height: 300px;
     width: 400px;
+    margin: auto;
+}
+
+
+/* Styling */
+
+#main-title {
+    text-align: center;
+    font-size: 60px;
+    margin: 0;
+    font-family: 'RocknRoll One', sans-serif;
+}
+
+.card {
+    height: 100px;
+    width: 100px;
 }
