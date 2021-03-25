@@ -9,8 +9,7 @@ function getImageSrc(num) {
 
 function main() {
     
-    const grid = $(".grid");
-    const resultDisplay = $("#result");
+    const grid = $("#grid");
 
     let cardCollection = [];   // List of images URLs
     let cardsChosenId = [];    // List of selected cards
@@ -25,6 +24,13 @@ function main() {
     }    
 
     function createBoard() {
+
+	// Reset data
+	grid.empty();
+	cardsChosenId = [];
+	cardsWon = [];
+
+	// Buind HTML collection
 	let htmlCards = [];
 	let i = 0;
 	for(let i=0; i<cardCollection.length; i++) {
@@ -39,7 +45,8 @@ function main() {
 	    htmlCards.push(card);
 	}
 	htmlCards.sort(() => 0.5 - Math.random());
-	
+
+	// Insert HTML cards
 	for(let i=0; i<htmlCards.length; i++) {
 	    let card = htmlCards[i];
 	    card.click(flipcard);
@@ -74,14 +81,11 @@ function main() {
 	}
 	
 	cardsChosenId = [];
-	resultDisplay.text(cardsWon.length);
-	if (cardsWon.length === pairs) {
-	    resultDisplay.text("Congratulations! You found them all!");
-	}
     }
 
     newCollection();
     createBoard();
+    $("#restart").click(createBoard);
 }
 
 $(main);
