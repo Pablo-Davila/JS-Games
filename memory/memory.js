@@ -2,59 +2,6 @@
 
 const pairs = 6;
 const urlCardBack = "img/pokeball.png";
-//"img/cardback_2.png";
-
-/*
-const cardArray = [
-    {
-	name: "fries",
-	img: "img/fries.png"
-    },
-    {
-	name: "fries",
-	img: "img/fries.png"
-    },
-    {
-	name: "cheeseburger",
-	img: "img/cheeseburger.png"
-    },
-    {
-	name: "cheeseburger",
-	img: "img/cheeseburger.png"
-    },
-    {
-	name: "hotdog",
-	img: "img/hotdog.png"
-    },
-    {
-	name: "hotdog",
-	img: "img/hotdog.png"
-    },
-    {
-	name: "ice-cream",
-	img: "img/ice-cream.png"
-    },
-    {
-	name: "ice-cream",
-	img: "img/ice-cream.png"
-    },
-    {
-	name: "milkshake",
-	img: "img/milkshake.png"
-    },
-    {
-	name: "milkshake",
-	img: "img/milkshake.png"
-    },
-    {
-	name: "pizza",
-	img: "img/pizza.png"
-    },
-    {
-	name: "pizza",
-	img: "img/pizza.png"
-    },
-];*/
 
 function getImageSrc(num) {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`;
@@ -93,17 +40,13 @@ function main() {
 		}
 	    );
 	    htmlCards.push(card);
-	    /**/console.log("l1");
 	}
-	/**/console.log(htmlCards);
 	htmlCards.sort(() => 0.5 - Math.random());
-	/**/console.log(htmlCards);
 	
 	for(let i=0; i<htmlCards.length; i++) {
 	    let card = htmlCards[i];
 	    card.click(flipcard);
 	    grid.append(card);
-	    /**/console.log("l2");
 	}
     }
 
