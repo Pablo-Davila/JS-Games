@@ -1,0 +1,76 @@
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    padding: 5em;
+}
+
+a {
+    color: darkcyan;
+    text-decoration: none;
+}
+a:hover {
+    opacity: 50%;
+}
+
+.grid {
+}
+
+.card {
+    height: 100px;
+    width: 100px;
+    margin: 3px;
+    
+    box-shadow: 2px 2px 3px gray;
+    border-radius: 11%;
+}
+
+#main-title {
+    text-align: center;
+    font-size: 60px;
+    margin: 0;
+    font-family: 'RocknRoll One', sans-serif;
+}
+
+#subtitle {
+    text-align: center;
+}
+
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    height: 318px;
+    width: 424px;
+    margin: auto;
+    margin-bottom: 2em;
+}
+
+#control {
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px;
+    min-width: 4em;
+
+    border-radius: 20%;
+    text-align: center;
+}
+
+#restart {
+    max-width: 40px;
+    opacity: 60%;
+}
+
+#restart:hover {
+    scale: 1.2;
+    opacity: 75%;
+}
