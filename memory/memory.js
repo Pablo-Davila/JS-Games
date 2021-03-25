@@ -56,6 +56,8 @@ function main() {
 
     function flipcard(){
 	let cardId = $(this).attr("id");
+	if (cardsWon.includes(cardId))
+	    return;
 	cardsChosenId.push(cardId);
 	$(this).attr("src",cardCollection[cardId]);
 	if (cardsChosenId.length === 2) {
@@ -73,7 +75,7 @@ function main() {
 	if (cardCollection[optionOneId] === cardCollection[optionTwoId]) {
 	    $(`#${optionOneId}`).attr("src", "img/white.png");
 	    $(`#${optionTwoId}`).attr("src", "img/white.png");
-	    cardsWon.push(cardsChosenId);
+	    cardsWon.push(...cardsChosenId);
 	}
 	else {
 	    $(`#${optionOneId}`).attr("src", urlCardBack);
