@@ -260,12 +260,12 @@ function main() {
 
     // Music button
     function musicOn() {
-	$("#btn-music").attr("src", "../img/nosound.png");
+	$("#btn-music").attr("src", "../common/icons/nosound_blue.png");
 	music.play();
 	music.loop = true;
     }
     function musicOff() {
-	$("#btn-music").attr("src", "../img/sound.png");
+	$("#btn-music").attr("src", "../common/icons/sound_blue.png");
 	music.pause();
     }
     function musicToggle(){
@@ -287,12 +287,12 @@ function main() {
 
 	if(playing) {
 	    playing = false;
-	    startBtn.attr("src", "../img/play.png");
+	    startBtn.attr("src", "../common/icons/play_blue.png");
 	    musicOff();
 	}
 	else {
 	    playing = true;
-	    startBtn.attr("src", "../img/pause.png");
+	    startBtn.attr("src", "../common/icons/pause_blue.png");
 	    gameIsOver = false;
 
 	    if (music.paused){
