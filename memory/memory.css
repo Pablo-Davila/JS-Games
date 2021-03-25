@@ -1,23 +1,38 @@
 
-
-/* Display */
-
 html,
 body {
-    width: 100vw;
-    height: 100vh;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    padding: 5em;
+}
+
+a {
+    color: darkcyan;
+    text-decoration: none;
+}
+a:hover {
+    opacity: 50%;
 }
 
 .grid {
     display: flex;
     flex-wrap: wrap;
-    height: 300px;
-    width: 400px;
+    height: 318px;
+    width: 424px;
     margin: auto;
 }
 
-
-/* Styling */
+.card {
+    height: 100px;
+    width: 100px;
+    margin: 3px;
+    
+    box-shadow: 2px 2px 3px gray;
+    border-radius: 11%;
+}
 
 #main-title {
     text-align: center;
@@ -26,7 +41,6 @@ body {
     font-family: 'RocknRoll One', sans-serif;
 }
 
-.card {
-    height: 100px;
-    width: 100px;
+#subtitle {
+    text-align: center;
 }
