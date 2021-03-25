@@ -8,16 +8,13 @@ function getImageSrc(num) {
 }
 
 function main() {
-
-    //cardArray.sort(() => 0.5-Math.random());
     
     const grid = $(".grid");
     const resultDisplay = $("#result");
 
-    let cardCollection = [];
-    let cardsChosenId = [];
-    let cardsChosenIndex = [];
-    let cardsWon = [];
+    let cardCollection = [];   // List of images URLs
+    let cardsChosenId = [];    // List of selected cards
+    let cardsWon = [];         // List of already found pairs
 
     function newCollection(){
 	for(let i=0; i<pairs; i++) {
@@ -51,13 +48,14 @@ function main() {
     }
 
     function flipcard(){
-	/**/console.log("Flip");
 	let cardId = $(this).attr("id");
 	cardsChosenId.push(cardId);
 	$(this).attr("src",cardCollection[cardId]);
-	
 	if (cardsChosenId.length === 2) {
-	    setTimeout(checkForMatch, 500);
+	    if (cardsChosenId[0] != cardsChosenId[1]){
+		setTimeout(checkForMatch, 500);
+	    }
+	    else cardsChosenId.pop();
 	}
     }
 
@@ -74,8 +72,8 @@ function main() {
 	    $(`#${optionOneId}`).attr("src", urlCardBack);
 	    $(`#${optionTwoId}`).attr("src", urlCardBack);
 	}
+	
 	cardsChosenId = [];
-	cardsChosenIndex = [];
 	resultDisplay.text(cardsWon.length);
 	if (cardsWon.length === pairs) {
 	    resultDisplay.text("Congratulations! You found them all!");
