@@ -289,6 +289,9 @@ function main() {
 	    playing = false;
 	    startBtn.attr("src", "../common/icons/play_blue.png");
 	    musicOff();
+	    
+	    $("#main-title").css("display", "block");
+	    $("#subtitle").css("display", "block");
 	}
 	else {
 	    playing = true;
@@ -297,6 +300,11 @@ function main() {
 
 	    if (music.paused){
 		musicOn();
+	    }
+	    
+	    if(window.innerWidth < 1100) {
+		$("#main-title").css("display", "none");
+		$("#subtitle").css("display", "none");
 	    }
 	}
     }
@@ -339,6 +347,14 @@ function main() {
     $(document).keyup(control);
     
     draw();
+
+    // Assign moves to mobile swipes
+    let swiper = new Swipe('body');
+    swiper.onLeft(moveLeft);
+    swiper.onRight(moveRight);
+    swiper.onUp(rotate);
+    swiper.onDown(moveFullDown);
+    swiper.run();
 }
 
 $(main);

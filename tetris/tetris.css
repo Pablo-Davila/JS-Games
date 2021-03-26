@@ -23,15 +23,36 @@ body {
 }
 
 body {
-    padding: 5em;
+    padding-top: 5em;
+}
+
+h1 {
+    font-size: 4.5rem;
+}
+
+@media (max-width: 1100px) {
+    body {
+	font-size: 3rem;
+    }
+    h1 {
+	font-size: 9rem;
+    }
 }
 
 .game-display {
     display: flex;
-    width: 30em;
+    width: calc(min(36em,60%));
     margin: auto;
     margin-top: 5em;
 }
+
+@media (max-width: 1100px) {
+    .game-display {
+	width: unset;
+	margin-top: 2em;
+    }
+}
+
 
 #left-data,
 .buttons {
@@ -42,8 +63,8 @@ body {
 
 #btn-play,
 #btn-music {
-    width: 50px;
-    height: 50px;
+    width: 3.5em;
+    height: 3.5em;
 }
 #btn-play:hover,
 #btn-music:hover {
@@ -91,6 +112,37 @@ body {
     width:  23px !important;
 }
 
+@media (max-width: 1100px) {
+    
+    .grid {
+	height: 1000px;
+	width: 500px;
+	display: flex;
+	flex-wrap: wrap;
+    }
+
+    .grid div,
+    .preview-grid div {
+	height: 50px;
+	width:  50px;
+    }
+
+    .preview-grid {
+	height: 200px;
+	width: 200px;
+	display: flex;
+	flex-wrap: wrap;
+    }
+
+    .block-shape,
+    .block-bottom,
+    .block-frozen {
+	height: 48px !important;
+	width:  48px !important;
+    }
+
+}
+
 
 /* Styling */
 
@@ -109,13 +161,18 @@ a:hover {
 
 #main-title {
     font-family: "PixelGames";
-    font-size: 80px;
     margin: 0;
 }
 
 .info {
     font-family: "PixelGames";
-    font-size: 24px;
+    font-size: 2em;
+}
+
+@media (max-width: 1100px) {
+    .info {
+	font-size: 1em;
+    }
 }
 
 .grid,
@@ -128,7 +185,7 @@ a:hover {
 .block-shape,
 .block-bottom,
 .block-frozen {
-    border-radius: 6px !important;
+    border-radius: 0.3em !important;
     border-width: 1px !important;
     border-style: solid !important;
 }
