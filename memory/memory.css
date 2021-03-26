@@ -6,7 +6,20 @@ body {
 }
 
 body {
-    padding: 5em;
+    padding-top: 5em;
+}
+
+h1 {
+    font-size: 3.8rem;
+}
+
+@media (max-width: 1100px) {
+    body {
+	font-size: 2rem;
+    }
+    h1 {
+	font-size: 6rem;
+    }
 }
 
 a {
@@ -17,21 +30,17 @@ a:hover {
     opacity: 50%;
 }
 
-.grid {
-}
-
 .card {
-    height: 100px;
-    width: 100px;
-    margin: 3px;
+    height: 7em;
+    width: 7em;
+    margin: 0.2em;
     
-    box-shadow: 2px 2px 3px gray;
+    box-shadow: 0.15em 0.15em 0.2em gray;
     border-radius: 11%;
 }
 
 #main-title {
     text-align: center;
-    font-size: 60px;
     margin: 0;
     font-family: 'RocknRoll One', sans-serif;
 }
@@ -43,21 +52,28 @@ a:hover {
 #grid {
     display: flex;
     flex-wrap: wrap;
-    height: 318px;
-    width: 424px;
+    justify-content: center;
+    height: 22.25em;
+    width: 30em;
     margin: auto;
     margin-bottom: 2em;
 }
 
+@media (max-width: 1100px) {
+    #grid {
+	margin-top: calc(50% - 8em);
+    }
+}
+
 #control {
     display: flex;
-    width: 25%;
+    max-width: 20em;
     justify-content: space-around;
     margin: auto;
 }
 
 .btn {
-    max-width: 50px;
+    height: 3.5em;
     opacity: 60%;
 }
 
