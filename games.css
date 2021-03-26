@@ -38,7 +38,7 @@ body {
 }
 
 body {
-    padding: 5em;
+    padding-top: 5em;
     color: var(--clr-dark);
     font-family: var(--ff-primary);
     background: var(--clr-light);
@@ -52,8 +52,10 @@ a { text-decoration: none; }
 
 .container {
     display: flex;
-    width: 60%;
+    flex-wrap: wrap;
+    width: calc(min(90%,75em));
     margin: auto;
+    justify-content: center;
 }
 
 .game-card {
