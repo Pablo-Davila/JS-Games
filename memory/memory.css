@@ -51,26 +51,17 @@ a:hover {
 
 #control {
     display: flex;
-    width: 50%;
+    width: 25%;
     justify-content: space-around;
     margin: auto;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px;
-    min-width: 4em;
-
-    border-radius: 20%;
-    text-align: center;
-}
-
-#restart {
-    max-width: 40px;
+    max-width: 50px;
     opacity: 60%;
 }
 
-#restart:hover {
+.btn:hover {
     scale: 1.2;
     opacity: 75%;
 }
