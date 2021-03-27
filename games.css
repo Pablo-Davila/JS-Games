@@ -29,6 +29,16 @@
     --fs-small: 0.8rem;
 }
 
+@media (max-width: 1100px) {
+    :root {
+	--fs-h1: 6rem;
+	--fs-h2: 4.5rem;
+	--fs-h3: 2.5rem;
+	--fs-body: 2rem;
+	--fs-small: 1.4rem;
+    }
+}
+
 html,
 body {
     height: 100%;
@@ -41,6 +51,7 @@ body {
     padding-top: 5em;
     color: var(--clr-dark);
     font-family: var(--ff-primary);
+    font-size: var(--fs-body);
     background: var(--clr-light);
 }
 
