@@ -48,7 +48,13 @@ h1 { font-size: var(--fs-h1); }
 h2 { font-size: var(--fs-h2); }
 h3 { font-size: var(--fs-h3); }
 
-a { text-decoration: none; }
+a {
+    color: darkcyan;
+    text-decoration: none;
+}
+a:hover {
+    opacity: 50%;
+}
 
 .container {
     display: flex;
@@ -102,4 +108,5 @@ a { text-decoration: none; }
 #main-title,
 #subtitle {
     text-align: center;
+    margin-bottom: 0.2em;
 }
