@@ -1,5 +1,5 @@
 # JS-Games
-This repository holds the source code of a collection of simple JavaScript games that will be available at [my website](https://pablodavila.eu).
+This repository holds the source code of a collection of simple JavaScript games that are available at [my website](https://pablodavila.eu/games).
 
 ### Tetris
 A reimplementation of this classic game built with HTML elements.
