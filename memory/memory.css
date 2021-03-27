@@ -1,8 +1,7 @@
 
 html,
 body {
-    height: 100%;
-    overflow: hidden;
+    height: calc(100% - 10em);
 }
 
 body {
@@ -28,6 +27,11 @@ a {
 }
 a:hover {
     opacity: 50%;
+}
+
+img {
+    width: 100%;
+    height: 100%;
 }
 
 .card {
@@ -74,6 +78,7 @@ a:hover {
 
 .btn {
     height: 3.5em;
+    width: 3.5em;
     opacity: 60%;
 }
 

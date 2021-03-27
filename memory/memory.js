@@ -16,6 +16,7 @@ function main() {
     let cardsWon = [];         // List of already found pairs
 
     function newCollection(){
+	cardCollection = [];
 	for(let i=0; i<pairs; i++) {
 	    const random = Math.floor(Math.random()*833);
 	    cardCollection.push(getImageSrc(random));
@@ -35,20 +36,23 @@ function main() {
 	let i = 0;
 	for(let i=0; i<cardCollection.length; i++) {
 	    let card =  $(
-		"<img></img>",
-		{
-		    "id": i,
-		    "src": urlCardBack,
-		    "class": "card"
-		}
-	    );
+`<div id="${i}" class="card"> 
+  <div class="front">
+    <img src="${urlCardBack}"></img>
+  </div> 
+  <div class="back">
+    <img src="${cardCollection[i]}"></img>
+  </div> 
+</div>`);
+	    card.flip({
+		trigger: 'manual'
+	    });
 	    htmlCards.push(card);
 	}
 	htmlCards.sort(() => 0.5 - Math.random());
 
 	// Insert HTML cards
-	for(let i=0; i<htmlCards.length; i++) {
-	    let card = htmlCards[i];
+	for(let card of htmlCards) {
 	    card.click(flipcard);
 	    grid.append(card);
 	}
@@ -59,7 +63,7 @@ function main() {
 	if (cardsWon.includes(cardId))
 	    return;
 	cardsChosenId.push(cardId);
-	$(this).attr("src",cardCollection[cardId]);
+	$(this).flip(true);
 	if (cardsChosenId.length === 2) {
 	    if (cardsChosenId[0] != cardsChosenId[1]){
 		setTimeout(checkForMatch, 500);
@@ -73,21 +77,28 @@ function main() {
 	const optionTwoId = cardsChosenId[1];
 	
 	if (cardCollection[optionOneId] === cardCollection[optionTwoId]) {
-	    $(`#${optionOneId}`).attr("src", "img/white.png");
-	    $(`#${optionTwoId}`).attr("src", "img/white.png");
+	    $(`#${optionOneId}`).css("box-shadow", "none");
+	    $(`#${optionTwoId}`).css("box-shadow", "none");
+	    $(`#${optionOneId} img`).attr("src", "img/white.png");
+	    $(`#${optionTwoId} img`).attr("src", "img/white.png");
 	    cardsWon.push(...cardsChosenId);
 	}
 	else {
-	    $(`#${optionOneId}`).attr("src", urlCardBack);
-	    $(`#${optionTwoId}`).attr("src", urlCardBack);
+	    $(`#${optionOneId}`).flip(false);
+	    $(`#${optionTwoId}`).flip(false);
 	}
 	
 	cardsChosenId = [];
     }
 
-    newCollection();
-    createBoard();
-    $("#restart").click(createBoard);
+    function restart() {
+	newCollection();
+	createBoard();
+    }
+    
+    $("#restart").click(restart);
+
+    restart();
 }
 
 $(main);
