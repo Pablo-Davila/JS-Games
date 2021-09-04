@@ -1,62 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Tetris Game</title>
-    <link rel="icon" href="favicon.png">
-    <link rel="stylesheet" href="tetris.css">
+    <link rel="icon" href="favicon.png" />
+    <link rel="stylesheet" href="tetris.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="../common/js/swipe.js" charset="utf-8"></script>
     <script src="tetris.js" charset="utf-8"></script>
   </head>
-  
+
   <body>
     <!-- Background music -->
     <audio id="music">
-      <source src="../common/sound/arcade.mp3" volume="0.5" loop autoplay>
-	Your browser does not support the audio element.
+      <source src="../common/sound/arcade.mp3" volume="0.5" loop autoplay />
+      Your browser does not support the audio element.
     </audio>
 
     <!-- Title -->
     <h1 id="main-title">Tetris</h1>
     <p id="subtitle">
-      <i>Created by <a href="https://pablodavila.eu">Pablo Dávila Herrero</a></i>
+      <i
+        >Created by <a href="https://pablodavila.eu">Pablo Dávila Herrero</a></i
+      >
     </p>
 
     <!-- Game -->
     <div class="game-display">
-      
       <!-- Left column -->
       <div id="left-data" class="col w-40">
-	<div class="preview-shape">
-	  <div class="preview-grid"><!-- Preview of the next shape --></div>
-	</div>
+        <div class="preview-shape">
+          <div class="preview-grid"><!-- Preview of the next shape --></div>
+        </div>
 
-	<!-- Info -->
-	<div class="info">
-	    <span>Score</span>
-	    <span id="score-display">0</span>
-	    <span>Lines</span>
-	    <span id="lines-display">0</span>
-	    <span>Level</span>
-	    <span id="level-display">0</span>
-	</div>
-	
-	<!-- Buttons -->
-	<div class="buttons col">
-	  <img id="btn-play" src="../common/icons/play_blue.png"
-	       alt="Play/Pause" title="Shortcut: p">
-	  <img id="btn-music" src="../common/icons/sound_blue.png"
-	       alt="Music on/off" title="shortcut: m">
-	</div>
+        <!-- Info -->
+        <div class="info">
+          <span>Score</span>
+          <span id="score-display">0</span>
+          <span>Lines</span>
+          <span id="lines-display">0</span>
+          <span>Level</span>
+          <span id="level-display">0</span>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons col">
+          <img
+            id="btn-play"
+            src="../common/icons/play_blue.png"
+            alt="Play/Pause"
+            title="Shortcut: p"
+          />
+          <img
+            id="btn-music"
+            src="../common/icons/sound_blue.png"
+            alt="Music on/off"
+            title="shortcut: m"
+          />
+        </div>
       </div>
 
       <!-- Right column -->
       <div id="game" class="game col w-60">
-	<div id="grid" class="grid"><!-- Actual game grid --></div>
+        <div id="grid" class="grid"><!-- Actual game grid --></div>
       </div>
-      
     </div>
   </body>
-  
 </html>
