@@ -1,13 +1,17 @@
-
 /* Fonts */
 @font-face {
     font-family: "PixelGames";
-    src: url('../common/fonts/PixelGames.ttf')  format('truetype');
+    src: url('../common/fonts/PixelGames.ttf') format('truetype');
 }
 
 /* General */
-.w-40 { width: 40%;}
-.w-60 { width: 60%;}
+.w-40 {
+    width: 40%;
+}
+
+.w-60 {
+    width: 60%;
+}
 
 .col {
     display: flex;
@@ -32,24 +36,25 @@ h1 {
 
 @media (max-width: 1100px) {
     body {
-	font-size: 3rem;
+        font-size: 3rem;
     }
+
     h1 {
-	font-size: 9rem;
+        font-size: 9rem;
     }
 }
 
 .game-display {
     display: flex;
-    width: calc(min(36em,60%));
+    width: calc(min(36em, 60%));
     margin: auto;
     margin-top: 5em;
 }
 
 @media (max-width: 1100px) {
     .game-display {
-	width: unset;
-	margin-top: 2em;
+        width: unset;
+        margin-top: 2em;
     }
 }
 
@@ -66,6 +71,7 @@ h1 {
     width: 3.5em;
     height: 3.5em;
 }
+
 #btn-play:hover,
 #btn-music:hover {
     scale: 1.2;
@@ -75,7 +81,7 @@ h1 {
 .info {
     display: grid;
     grid-template-areas:
-	"score-text score-value" "lines-text lines-value" "level-text level-value";
+        "score-text score-value""lines-text lines-value""level-text level-value";
     grid-column-gap: 1em;
 }
 
@@ -95,7 +101,7 @@ h1 {
 .grid div,
 .preview-grid div {
     height: 25px;
-    width:  25px;
+    width: 25px;
 }
 
 .preview-grid {
@@ -109,36 +115,36 @@ h1 {
 .block-bottom,
 .block-frozen {
     height: 23px !important;
-    width:  23px !important;
+    width: 23px !important;
 }
 
 @media (max-width: 1100px) {
-    
+
     .grid {
-	height: 1000px;
-	width: 500px;
-	display: flex;
-	flex-wrap: wrap;
+        height: 1000px;
+        width: 500px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .grid div,
     .preview-grid div {
-	height: 50px;
-	width:  50px;
+        height: 50px;
+        width: 50px;
     }
 
     .preview-grid {
-	height: 200px;
-	width: 200px;
-	display: flex;
-	flex-wrap: wrap;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .block-shape,
     .block-bottom,
     .block-frozen {
-	height: 48px !important;
-	width:  48px !important;
+        height: 48px !important;
+        width: 48px !important;
     }
 
 }
@@ -150,6 +156,7 @@ a {
     color: darkcyan;
     text-decoration: none;
 }
+
 a:hover {
     opacity: 50%;
 }
@@ -171,7 +178,7 @@ a:hover {
 
 @media (max-width: 1100px) {
     .info {
-	font-size: 1em;
+        font-size: 1em;
     }
 }
 
