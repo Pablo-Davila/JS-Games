@@ -179,13 +179,17 @@ function main() {
 	}
 
 	// Rotate shape
-	// TODO: Avoid collisions
 	function rotate() {
 		if (!playing) return;
-		undraw();
-		currentRotation = (currentRotation + 1) % current.length;
-		current = theTetrominoes[random][currentRotation];
-		draw();
+		const newRotation = (currentRotation + 1) % current.length;
+		const newState = theTetrominoes[random][newRotation];
+		const columnPositions = newState.map(index => (index + currentPosition) % width);
+		if (!columnPositions.includes(0) || !columnPositions.includes(width - 1)) {
+			undraw();
+			currentRotation = newRotation;
+			current = newState;
+			draw();
+		}
 	}
 
 	// Show previous tetromino in previewSquares
