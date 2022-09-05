@@ -18,7 +18,7 @@ function main() {
 	function newCollection() {
 		cardCollection = [];
 		for (let i = 0; i < pairs; i++) {
-			const random = Math.floor(Math.random() * 833);
+			const random = Math.ceil(Math.random() * 833);
 			cardCollection.push(getImageSrc(random));
 			cardCollection.push(getImageSrc(random));
 		}
@@ -35,18 +35,18 @@ function main() {
 		let htmlCards = [];
 		let i = 0;
 		for (let i = 0; i < cardCollection.length; i++) {
+			// 			let card = $(
+			// 				`<div id="${i}" class="card"> 
+			//   <div class="front">
+			//     <img src="${urlCardBack}"></img>
+			//   </div> 
+			//   <div class="back">
+			//     <img src="${cardCollection[i]}"></img>
+			//   </div> 
+			// </div>`);
 			let card = $(
-				`<div id="${i}" class="card"> 
-  <div class="front">
-    <img src="${urlCardBack}"></img>
-  </div> 
-  <div class="back">
-    <img src="${cardCollection[i]}"></img>
-  </div> 
-</div>`);
-			card.flip({
-				trigger: 'manual'
-			});
+				`<img id="${i}" class="card" src="${urlCardBack}" />`
+			);
 			htmlCards.push(card);
 		}
 		htmlCards.sort(() => 0.5 - Math.random());
@@ -63,7 +63,7 @@ function main() {
 		if (cardsWon.includes(cardId))
 			return;
 		cardsChosenId.push(cardId);
-		$(this).flip(true);
+		$(this).attr("src", cardCollection[cardId]);
 		if (cardsChosenId.length === 2) {
 			if (cardsChosenId[0] != cardsChosenId[1]) {
 				setTimeout(checkForMatch, 500);
@@ -79,13 +79,17 @@ function main() {
 		if (cardCollection[optionOneId] === cardCollection[optionTwoId]) {
 			$(`#${optionOneId}`).css("box-shadow", "none");
 			$(`#${optionTwoId}`).css("box-shadow", "none");
-			$(`#${optionOneId} img`).attr("src", "img/white.png");
-			$(`#${optionTwoId} img`).attr("src", "img/white.png");
+			$(`#${optionOneId}`).attr("src", "img/white.png");
+			$(`#${optionTwoId}`).attr("src", "img/white.png");
 			cardsWon.push(...cardsChosenId);
+			
+			if(cardsWon.length === cardCollection.length){
+				setTimeout(restart, 1000);
+			}
 		}
 		else {
-			$(`#${optionOneId}`).flip(false);
-			$(`#${optionTwoId}`).flip(false);
+			$(`#${optionOneId}`).attr("src", urlCardBack);
+			$(`#${optionTwoId}`).attr("src", urlCardBack);
 		}
 
 		cardsChosenId = [];
