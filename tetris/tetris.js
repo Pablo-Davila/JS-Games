@@ -238,6 +238,7 @@ function main() {
 				gameIsOver = true;
 				playing = false;
 				scoreDisplay.text("END");
+				musicOff();
 			}
 		}
 	}
