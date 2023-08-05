@@ -349,7 +349,7 @@ function main() {
 		else if (e.key === " ") {
 			moveFullDown();
 		}
-		else if (e.key === "p") {
+		else if (e.key === "p" || e.keyCode === 13) {
 			playToggle();
 		}
 		else if (e.key === "m") {
