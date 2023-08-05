@@ -9,6 +9,7 @@ let timerId = null;
 let playing = false;
 let gameIsOver = false;
 let level = 0;
+let musicPaused = null;
 
 // Define smallTetrominos
 const smallTetrominoes = [
@@ -274,8 +275,14 @@ function main() {
 	}
 	function musicToggle() {
 		let music = document.getElementById("music");
-		if (music.paused) musicOn();
-		else musicOff();
+		if (music.paused) {
+			musicOn();
+			musicPaused = false;
+		}
+		else {
+			musicOff();
+			musicPaused = true;
+		}
 	}
 
 	$("#btn-music").click(function (event) {
@@ -302,7 +309,7 @@ function main() {
 			startBtn.attr("src", "../common/icons/pause_blue.png");
 			gameIsOver = false;
 
-			if (music.paused) {
+			if (music.paused && !musicPaused) {
 				musicOn();
 			}
 
