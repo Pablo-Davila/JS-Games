@@ -4,66 +4,86 @@
     src: url('../common/fonts/PixelGames.ttf') format('truetype');
 }
 
-/* General */
-.w-40 {
-    width: 40%;
+a {
+    color: darkcyan;
+    text-decoration: none;
 }
 
-.w-60 {
-    width: 60%;
+a:hover {
+    opacity: 50%;
 }
 
-.col {
+body {
+    height: 100vh;
+    margin: 0;
+
     display: flex;
     flex-direction: column;
-}
-
-/* Display */
-
-html,
-body {
-    height: 100%;
-    overflow: hidden;
-}
-
-body {
-    padding-top: 5em;
+    justify-content: center;
 }
 
 h1 {
     font-size: 4.5rem;
 }
 
-@media (max-width: 1100px) {
-    body {
-        font-size: 3rem;
-    }
+#main-title,
+#subtitle {
+    margin-top: 0;
 
-    h1 {
-        font-size: 9rem;
-    }
+    text-align: center;
+}
+
+#main-title {
+    font-family: "PixelGames";
+    margin: 0;
 }
 
 .game-display {
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+
     display: flex;
-    width: calc(min(36em, 60%));
-    margin: auto;
-    margin-top: 5em;
+    justify-content: center;
 }
 
-@media (max-width: 1100px) {
-    .game-display {
-        width: unset;
-        margin-top: 2em;
-    }
-}
+#left-data {
+    margin-right: 6rem;
 
-
-#left-data,
-.buttons {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
     align-items: center;
+}
+
+.preview-grid {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info {
+    margin-top: 2.5rem;
+
+    font-family: "PixelGames";
+    font-size: 2rem;
+
+    display: grid;
+    grid-template-areas:
+        "score-text score-value"
+        "lines-text lines-value"
+        "level-text level-value";
+    grid-column-gap: 1em;
+}
+
+.buttons {
+    margin-top: 2.5rem;
+
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 2em;
+    align-items: center;
 }
 
 #btn-play,
@@ -78,47 +98,86 @@ h1 {
     opacity: 0.9;
 }
 
-.info {
-    display: grid;
-    grid-template-areas:
-        "score-text score-value""lines-text lines-value""level-text level-value";
-    grid-column-gap: 1em;
-}
-
-.preview-grid,
-.grid {
-    margin-left: auto;
-    margin-right: auto;
+.game {
+    height: 100%;
+    aspect-ratio: 0.5;
 }
 
 .grid {
-    height: 500px;
-    width: 250px;
+    /* height: 500px; */
+    height: 100%;
+    aspect-ratio: 0.5;
+
     display: flex;
     flex-wrap: wrap;
 }
 
-.grid div,
-.preview-grid div {
-    height: 25px;
-    width: 25px;
-}
-
+.grid,
 .preview-grid {
-    height: 100px;
-    width: 100px;
-    display: flex;
-    flex-wrap: wrap;
+    background-color: yellow;
+    border-style: hidden;
+    border-radius: 0.6rem;
+}
+
+.grid div {
+    height: 5%;
+    aspect-ratio: 1;
+}
+.preview-grid div {
+    height: 25%;
+    aspect-ratio: 1;
 }
 
 .block-shape,
 .block-bottom,
 .block-frozen {
-    height: 23px !important;
-    width: 23px !important;
+    height: calc(5% - 2px) !important;
+    aspect-ratio: 1;
+
+    border-radius: 0.3em !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.preview-grid .block-shape,
+.preview-grid .block-bottom,
+.preview-grid .block-frozen {
+    height: calc(25% - 2px) !important;
+}
+
+.block-shape {
+    background-color: blue !important;
+    border-color: lightblue !important;
+}
+
+.block-bottom {
+    background-color: purple !important;
+    border-color: pink !important;
+}
+
+.block-frozen {
+    background-color: green !important;
+    border-color: lightgreen !important;
 }
 
 @media (max-width: 1100px) {
+
+    body {
+        font-size: 3rem;
+    }
+
+    h1 {
+        font-size: 9rem;
+    }
+
+    .game-display {
+        width: unset;
+        margin-top: 2em;
+    }
+
+    .info {
+        font-size: 3rem;
+    }
 
     .grid {
         height: 1000px;
@@ -147,67 +206,4 @@ h1 {
         width: 48px !important;
     }
 
-}
-
-
-/* Styling */
-
-a {
-    color: darkcyan;
-    text-decoration: none;
-}
-
-a:hover {
-    opacity: 50%;
-}
-
-#main-title,
-#subtitle {
-    text-align: center;
-}
-
-#main-title {
-    font-family: "PixelGames";
-    margin: 0;
-}
-
-.info {
-    font-family: "PixelGames";
-    font-size: 2em;
-}
-
-@media (max-width: 1100px) {
-    .info {
-        font-size: 1em;
-    }
-}
-
-.grid,
-.preview-grid {
-    background-color: yellow;
-    border-style: hidden;
-    border-radius: 10px;
-}
-
-.block-shape,
-.block-bottom,
-.block-frozen {
-    border-radius: 0.3em !important;
-    border-width: 1px !important;
-    border-style: solid !important;
-}
-
-.block-shape {
-    background-color: blue !important;
-    border-color: lightblue !important;
-}
-
-.block-bottom {
-    background-color: purple !important;
-    border-color: pink !important;
-}
-
-.block-frozen {
-    background-color: green !important;
-    border-color: lightgreen !important;
 }
