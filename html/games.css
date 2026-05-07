@@ -121,3 +121,63 @@ a:hover {
     text-align: center;
     margin-bottom: 0.2em;
 }
+
+.menu-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(17, 17, 17, 0.55);
+}
+
+.menu-popup-overlay.is-hidden {
+    display: none;
+}
+
+.menu-popup {
+    max-width: 28rem;
+    width: 100%;
+    padding: 1.75rem 1.5rem 1.5rem;
+    border-radius: 1em;
+    border: solid var(--clr-dark);
+    box-shadow: 10px 10px 5px grey;
+    background: var(--clr-light);
+    text-align: center;
+}
+
+.menu-popup-title {
+    font-size: var(--fs-h3);
+    margin: 0 0 0.75em;
+    line-height: 1.2;
+}
+
+.menu-popup-text {
+    margin: 0 0 0.75em;
+    line-height: 1.45;
+}
+
+.menu-popup-explore {
+    margin: 0 0 1.25em;
+    font-style: italic;
+    color: var(--clr-grey);
+    line-height: 1.45;
+}
+
+.menu-popup-dismiss {
+    font-family: inherit;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-bold);
+    padding: 0.5em 1.75em;
+    border: solid var(--clr-dark);
+    border-radius: 1em;
+    background: var(--clr-accent-dark);
+    color: var(--clr-light);
+    cursor: pointer;
+}
+
+.menu-popup-dismiss:hover {
+    opacity: 0.85;
+}
